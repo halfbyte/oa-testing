@@ -13,6 +13,9 @@ Gem::Specification.new do |s|
 
   s.files = ['README.md', 'LICENSE'] + Dir['lib/**/*']
 
+  s.add_dependency 'omniauth', '~> 0.1.0'
+  s.add_dependency 'fakeweb',  '~> 1.3.0'
+
   s.add_development_dependency 'cucumber', '~> 0.9.0'
   s.add_development_dependency 'rspec',    '~> 1.3.0'
 end
