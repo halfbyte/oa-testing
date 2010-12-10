@@ -32,4 +32,5 @@ Feature: Twitter
         auth_hash['user_info']['name'].should == 'James Garcia'
       end
       """
+    When I bundle the oa-testing gem and require it in "features/support/env.rb"
     Then the features should pass

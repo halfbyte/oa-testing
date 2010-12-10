@@ -1,6 +1,6 @@
 Given /^I have a Sinatra app with Cucumber and OmniAuth$/ do
   FileUtils.rm_rf(App::ROOT)
-  FileUtils.cp_r(File.join(ROOT, 'fixtures/app'), App::ROOT)
+  FileUtils.cp_r(File.join(ROOT, 'spec/fixtures/app'), App::ROOT)
 end
 
 When /^I add a "([^"]*)" feature with:$/ do |name, text|
@@ -38,8 +38,21 @@ When /^I add the following to my Sinatra app:$/ do |text|
   end
 end
 
+When /^I bundle the oa\-testing gem and require it in "([^"]*)"$/ do |file|
+  App.open_file('Gemfile', 'a') do |f|
+    f.write "gem 'oa-testing', path: '../..'"
+  end
+
+  file_data = File.read(File.join(App::ROOT, file))
+  App.open_file(file, 'w') do |f|
+    f.write file_data.sub(/(require '.*'\n)\n/, "\\1require 'oa-testing'\n\n")
+  end
+end
+
 Then /^the features should pass$/ do
   RVM.gemset.use! 'oa-testing-test'
+
+  cucumber_output = ''
 
   FileUtils.cd(App::ROOT) do
     cucumber_output = `BUNDLE_GEMFILE="#{App::ROOT}/Gemfile" cucumber`
