@@ -16,7 +16,7 @@ When /^I add the "([^"]*)" strategy to the middleware stack$/ do |strategy|
   App.open_file('app.rb', 'w') do |f|
     f.write app.gsub(
       /(enable :sessions)/,
-      "\\1\n\nuse OmniAuth::Strategies::Twitter, 'KEY', 'SECRET'"
+      "\\1\n\nuse OmniAuth::Strategies::#{strategy}, 'KEY', 'SECRET'"
     )
   end
 end

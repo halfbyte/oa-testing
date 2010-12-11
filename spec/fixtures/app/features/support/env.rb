@@ -4,6 +4,8 @@ require 'rspec'
 require 'rack/test'
 require 'webrat'
 
+FakeWeb.allow_net_connect = false
+
 Webrat.configure do |config|
   config.mode = :rack
 end
