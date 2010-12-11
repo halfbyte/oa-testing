@@ -9,12 +9,6 @@ class OmniAuth::Strategies::Facebook
     initialize_without_fakeweb(*args)
 
     FakeWeb.register_uri(
-      :post,
-      'https://graph.facebook.com/oauth/request_token',
-      body: 'oauth_token=fake&oauth_token_secret=fake'
-    )
-
-    FakeWeb.register_uri(
      :post,
      'https://graph.facebook.com/oauth/access_token',
      body: 'oauth_token=fake&oauth_token_secret=fake&user_id=100001732014698'
