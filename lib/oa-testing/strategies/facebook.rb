@@ -11,13 +11,13 @@ class OmniAuth::Strategies::Facebook
     FakeWeb.register_uri(
      :post,
      'https://graph.facebook.com/oauth/access_token',
-     body: 'oauth_token=fake&oauth_token_secret=fake&user_id=100001732014698'
+     {:body => 'oauth_token=fake&oauth_token_secret=fake&user_id=100001732014698'}
     )
 
     FakeWeb.register_uri(
       :get,
       'https://graph.facebook.com/me?access_token=',
-      body: File.read(File.join(File.dirname(__FILE__), '../fixtures/facebook_user.json'))
+      {:body => File.read(File.join(File.dirname(__FILE__), '../fixtures/facebook_user.json'))}
     )
   end
 end
